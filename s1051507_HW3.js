@@ -6,7 +6,6 @@ function progress(){
 	{
 	    var result=calc(seq[i]); //第i筆測資
 		output=output+"<br>"+result;
-		//document.write(output);
 	}
     document.getElementById('out').innerHTML= output;
 }
