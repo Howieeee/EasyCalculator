@@ -43,7 +43,6 @@ function calc(str)
 			var opStackTop = operatorStack[operatorStack.length-1];
 
 			while(opStackTop!="("){
-				//document.writeln("<br>"+opStackTop);
 				postFix.push(opStackTop); //把運算子push進postFix stack
 				operatorStack.pop(); 
 				opStackTop = operatorStack[operatorStack.length-1];
@@ -52,14 +51,9 @@ function calc(str)
 			operatorStack.pop(); 
 		}
 		else if(ifOperatorVaild(ch)){ //合法運算子
-			
 			var opStackTop = operatorStack[operatorStack.length-1];
-			//document.writeln("stack 長度: "+operatorStack.length+"<br>");
-			//document.writeln("stack top: "+opStackTop+"<br>");
-			//document.writeln("stack top 次序"+inStackPriority(opStackTop)+"<br>");
-			//document.writeln("當前ch 次序"+comingCharPriority(ch)+"<br>");
+
 			while(inStackPriority(opStackTop) <= comingCharPriority(ch)){
-				//document.writeln("<br>進入while<br>");
 				postFix.push(opStackTop);
 				operatorStack.pop();
 				opStackTop = operatorStack[operatorStack.length-1];
@@ -72,7 +66,6 @@ function calc(str)
 		
 		
 	}
-	//document.write("<br>stack top"+operatorStack[operatorStack.length-1]);
 	for(var i= operatorStack.length-1;i>=0;i--)
 		postFix.push(operatorStack[i]);
 	
@@ -83,14 +76,9 @@ function calc(str)
 			error = true;
 		calSeq.push(postFix[i]);
 	}
-	//document.write("<br>");
-	//for(var i=0;i<calSeq.length;i++)
-		//document.write(calSeq[i]);
-	//document.write("<br>");
 	if(!error){
 	var calStack = new Array();
 	for(var i=calSeq.length-1;i>=0;i--){
-		//document.write("now:"+calSeq[i]+"<br>");
 		if(calSeq[i]=="#")
 			break;
 		if(!isNaN(calSeq[i])) //是數字就push進去
@@ -100,20 +88,12 @@ function calc(str)
 			calStack.pop();
 			var num1 = parseInt(calStack[calStack.length-1]);
 			calStack.pop();
-			//document.write("num1:"+num1+"<br>");
-			//document.write("num2:"+num2+"<br>");
 			var result = cal(num1,num2,calSeq[i]);
 			calStack.push(result);
 		}
 	}
 	
-	
-	//document.write("<br>");
-	//for(var i=0;i<postFix.length;i++)
-	//	document.write(postFix[i]);
-	//document.write("<br>");
-	//for(var i=0;i<calSeq.length;i++)
-		//document.write(calSeq[i]);
+
 	
 		answer = calStack[calStack.length-1];
 		if(isNaN(answer))
